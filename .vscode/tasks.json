@@ -1,0 +1,24 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "superbol",
+			"forDebug": true,
+			"forCoverage": false,
+			"executable": true,
+			"cobcPath": "cobc",
+			"extraArgs": [],
+			"problemMatcher": [
+				"$gnucobol",
+				"$gnucobol-warning",
+				"$gnucobol-error",
+				"$gnucobol-note"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"label": "SuperBOL: build (debug)"
+		}
+	]
+}
