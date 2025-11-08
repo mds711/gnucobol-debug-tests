@@ -1,6 +1,6 @@
        IDENTIFICATION DIVISION.
-      *Programm liest ein Logfile und zeigt es an
        PROGRAM-ID. LOGREADER.
+       REMARKS. program reads a log file and displays entries.
 
        ENVIRONMENT DIVISION.
        INPUT-OUTPUT SECTION.
@@ -40,5 +40,5 @@
               END-READ
            END-PERFORM
            CLOSE LOGFILE
-           DISPLAY "Anzahl der ausgegebenen Zeilen: " LINE-COUNT
+           DISPLAY "Count of displayed lines: " LINE-COUNT
            GOBACK.

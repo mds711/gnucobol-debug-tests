@@ -1,6 +1,7 @@
        IDENTIFICATION DIVISION.
        PROGRAM-ID. LOGSORT.
-
+       REMARKS. program counts log entries.
+       
        ENVIRONMENT DIVISION.
        INPUT-OUTPUT SECTION.
        FILE-CONTROL.
@@ -14,7 +15,7 @@
 
        WORKING-STORAGE SECTION.
        77  EOF-FLAG         PIC 9 VALUE 0.
-       77  ZEILEN           PIC 9(4) VALUE 0.
+       77  LINE-COUNT       PIC 9(4) VALUE 0.
        77  I                PIC 9(4) VALUE 0.
        77  J                PIC 9(4) VALUE 0.
        77  J-PLUS-ONE       PIC 9(4) VALUE 0.
@@ -45,37 +46,37 @@
 
            PERFORM SORT-TABLE
 
-           DISPLAY "Top Log-Einträge nach Haeufigkeit:"
+           DISPLAY "Top list of entries:"
            PERFORM VARYING I FROM 1 BY 1 UNTIL I > MAX-ROWS
               IF ENTRY-COUNT(I) > 0
                  DISPLAY ENTRY-COUNT(I) "x " ENTRY-TEXT(I)
               END-IF
            END-PERFORM
 
-           DISPLAY "Anzahl verschiedener Eintraege: " ZEILEN
+           DISPLAY "Count of different entries: " LINE-COUNT
            CLOSE LOGFILE
            STOP RUN.
 
-      * Sucht LOG-REC in der Tabelle, erhoeht Count, ggf. neuer Eintrag
+      * search LOG-REC in table, increments counter, new entry
        ADD-OR-COUNT.
            MOVE 0 TO FOUND-FLAG
            PERFORM VARYING IDX FROM 1 BY 1
-                   UNTIL IDX > ZEILEN OR FOUND-FLAG = 1
+                   UNTIL IDX > LINE-COUNT OR FOUND-FLAG = 1
               IF ENTRY-TEXT(IDX) = LOG-REC
                  ADD 1 TO ENTRY-COUNT(IDX)
                  MOVE 1 TO FOUND-FLAG
               END-IF
            END-PERFORM
            IF FOUND-FLAG = 0
-              ADD 1 TO ZEILEN
-              MOVE LOG-REC TO ENTRY-TEXT(ZEILEN)
-              MOVE 1 TO ENTRY-COUNT(ZEILEN)
+              ADD 1 TO LINE-COUNT
+              MOVE LOG-REC TO ENTRY-TEXT(LINE-COUNT)
+              MOVE 1 TO ENTRY-COUNT(LINE-COUNT)
            END-IF.
 
-      * Bubble Sort nach ENTRY-COUNT absteigend
+      * bubble sort on ENTRY-COUNT descending
        SORT-TABLE.
-           PERFORM VARYING I FROM 1 BY 1 UNTIL I > ZEILEN
-              PERFORM VARYING J FROM 1 BY 1 UNTIL J > ZEILEN - I
+           PERFORM VARYING I FROM 1 BY 1 UNTIL I > LINE-COUNT
+              PERFORM VARYING J FROM 1 BY 1 UNTIL J > LINE-COUNT - I
                  COMPUTE J-PLUS-ONE = J + 1
                  IF ENTRY-COUNT(J) < ENTRY-COUNT(J-PLUS-ONE)
                     MOVE J          TO SWAP-IDX1

@@ -1,5 +1,6 @@
        IDENTIFICATION DIVISION.
        PROGRAM-ID. simple-hello.
+       REMARKS. program demonstrates a simple ACCEPT and DISPLAY.
 
        DATA DIVISION.
        WORKING-STORAGE SECTION.
@@ -11,8 +12,7 @@
            ACCEPT NAME
            DISPLAY "Enter your age: "
            ACCEPT AGE
-           ADD 1 TO AGE
-           SUBTRACT 1 FROM AGE
-           DISPLAY "Hello, " NAME " - you are " AGE " years old."
+           DISPLAY "Hello, " FUNCTION TRIM(NAME)
+                   " - you are " AGE " years old."
 
            STOP RUN.

@@ -1,5 +1,6 @@
        IDENTIFICATION DIVISION.
        PROGRAM-ID. BUBBLE-SORT.
+       REMARKS. program demonstrates bubble sort algorithm.
 
        DATA DIVISION.
        WORKING-STORAGE SECTION.
@@ -41,4 +42,3 @@
               END-PERFORM
            END-PERFORM
            EXIT.
-
