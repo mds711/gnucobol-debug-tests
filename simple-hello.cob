@@ -5,7 +5,7 @@
        DATA DIVISION.
        WORKING-STORAGE SECTION.
        01 NAME PIC X(12) VALUE 'Kai'.
-       01 AGE  PIC 99 VALUE 38.
+       01 AGE  PIC 999 VALUE 38.
 
        PROCEDURE DIVISION.
            DISPLAY "Enter your name: "
